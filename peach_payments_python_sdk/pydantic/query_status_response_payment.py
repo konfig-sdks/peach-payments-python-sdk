@@ -1,0 +1,54 @@
+# coding: utf-8
+
+"""
+    Payments API inbound
+
+    The Payments API enables you to do a custom integration with Peach Payments and thereby support multiple payment methods.
+
+    The version of the OpenAPI document: 2.0.0
+    Contact: support@peachpayments.com
+    Created by: https://support.peachpayments.com/support/home
+"""
+
+from datetime import datetime, date
+import typing
+from enum import Enum
+from typing_extensions import TypedDict, Literal, TYPE_CHECKING
+from pydantic import BaseModel, Field, RootModel, ConfigDict
+
+
+class QueryStatusResponsePayment(BaseModel):
+    # Payment link ID.
+    link_id: typing.Optional[str] = Field(None, alias='linkId')
+
+    # Payment link URL.
+    link_url: typing.Optional[str] = Field(None, alias='linkUrl')
+
+    # Payment amount.
+    amount: typing.Optional[typing.Union[int, float]] = Field(None, alias='amount')
+
+    # Payment link status.
+    status: typing.Optional[Literal["initiated", "processing", "expired", "cancelled", "completed"]] = Field(None, alias='status')
+
+    # Currency code for the payment.
+    currency: typing.Optional[Literal["ZAR", "KES", "USD"]] = Field(None, alias='currency')
+
+    # Payment order number provided by merchant.
+    merchant_invoice_id: typing.Optional[str] = Field(None, alias='merchantInvoiceId')
+
+    # Merchant channel ID that the payment link was created in.
+    entity_id: typing.Optional[str] = Field(None, alias='entityId')
+
+    # A note to include with the payment link.
+    notes: typing.Optional[str] = Field(None, alias='notes')
+
+    # Timestamp when the payment link expires.
+    expiry_time: typing.Optional[str] = Field(None, alias='expiryTime')
+
+    # Batch ID for the payment link.
+    batch_id: typing.Optional[str] = Field(None, alias='batchId')
+
+    model_config = ConfigDict(
+        protected_namespaces=(),
+        arbitrary_types_allowed=True
+    )
